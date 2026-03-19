@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp:*)",
+      "Bash(chmod:*)",
+      "Bash(command -v jq)",
+      "Bash(jq --version)",
+      "Bash(command -v git)",
+      "Bash(git --version)",
+      "Bash(bash \"C:/Users/gary.gealy/.claude/statusline-command.sh\")",
+      "Bash(where jq:*)",
+      "Read(//c/ProgramData/chocolatey/bin/**)",
+      "Read(//c/Program Files/jq/**)",
+      "Read(//c/Users/gary.gealy/AppData/Local/Microsoft/**)",
+      "Read(//c/ProgramData/**)",
+      "Bash(/c/Users/gary.gealy/AppData/Local/Programs/Git/bin/jq --version)",
+      "Bash(echo \"$PATH\")",
+      "Bash(bash \"C:/repos/TheShop/f-cat-new/.claude/hooks/check-software.sh\")",
+      "Bash(find C:/repos/TheShop/f-cat-new -type d -not -path */.git/* -not -path */node_modules/*)",
+      "Bash(grep -E '\\\\.\\(json|yml|yaml|toml|lock\\)$')"
+    ]
+  }
+}

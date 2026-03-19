@@ -1,0 +1,19 @@
+{
+  "enabledPlugins": {
+    "research-plan-implement@research-plan-implement-workflow": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/check-software.sh",
+            "statusMessage": "Checking for Trivy, Gitleaks, and Cloc"
+          }
+        ]
+      }
+    ]
+  }
+}
