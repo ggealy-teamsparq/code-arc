@@ -52,12 +52,12 @@ Run all three tools sequentially. Display output as each completes.
 
 **Trivy — vulnerability scan:**
 ```bash
-trivy fs <repo-path> --format table --exit-code 0
+trivy fs <repo-path> --format table --exit-code 0 --skip-db-update --no-progress
 ```
 
 **Gitleaks — secrets scan:**
 ```bash
-gitleaks detect --source <repo-path> --no-git
+gitleaks detect --source <repo-path> --no-git --no-banner --exit-code 0 --max-target-megabytes 10
 ```
 
 **Cloc — code stats:**
@@ -69,12 +69,12 @@ cloc <repo-path>
 
 **Trivy:**
 ```bash
-trivy fs <repo-path> --format table --exit-code 0
+trivy fs <repo-path> --format table --exit-code 0 --skip-db-update --no-progress
 ```
 
 **Gitleaks:**
 ```bash
-gitleaks detect --source <repo-path> --no-git
+gitleaks detect --source <repo-path> --no-git --no-banner --exit-code 0 --max-target-megabytes 10
 ```
 
 ### Code stats (`--stats`)
@@ -109,12 +109,57 @@ After all tools have run, display a `## Scan Summary` section:
 
 ---
 
-## Step 5 — Update Review History
+## Step 5 — Write Report File
 
-Append a row to the `## Review History` table in `CLAUDE.local.md`:
+Write the full scan output to a report file at:
+```
+workspace/<repo-name>/reports/<YYYY-MM-DD>-scan.md
+```
+
+Create the `reports/` directory if it doesn't exist.
+
+Report format:
+```markdown
+# Scan Report — <repo-name>
+
+**Date:** <YYYY-MM-DD>
+**Reviewer:** <value from CLAUDE.local.md>
+**Scan Mode:** <Full scan | Security only | Code stats only | Custom>
+**Repo Path:** <repo-path>
+
+---
+
+## Trivy — Vulnerability Scan
+<full trivy output, or "Not run">
+
+---
+
+## Gitleaks — Secrets Scan
+<full gitleaks output, or "Not run">
+
+---
+
+## Cloc — Code Stats
+<full cloc output, or "Not run">
+
+---
+
+## Summary
+- Trivy: <X critical, Y high, Z medium — or "No vulnerabilities found" — or "Not run">
+- Gitleaks: <X secrets detected — or "No secrets detected" — or "Not run">
+- Cloc: <top 3 languages with line counts, total lines — or "Not run">
+```
+
+Confirm the report was written and display the file path to the user.
+
+---
+
+## Step 6 — Update Review History
+
+Append a row to the `## Review History` table in `CLAUDE.local.md`, including the report file path:
 
 ```
-| <YYYY-MM-DD> | <repo-name> | <scan mode> | (no report yet) |
+| <YYYY-MM-DD> | <repo-name> | <scan mode> | workspace/<repo-name>/reports/<YYYY-MM-DD>-scan.md |
 ```
 
 Confirm the update was written.

@@ -1,7 +1,4 @@
 {
-  "enabledPlugins": {
-    "research-plan-implement@research-plan-implement-workflow": true
-  },
   "hooks": {
     "SessionStart": [
       {
