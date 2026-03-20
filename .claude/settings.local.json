@@ -42,7 +42,18 @@
       "Bash(powershell.exe -Command \"winget search gitleaks\")",
       "Bash(powershell.exe -Command \"winget install AquaSecurity.Trivy --accept-package-agreements --accept-source-agreements\")",
       "Bash(powershell.exe -Command \"winget install Gitleaks.Gitleaks --accept-package-agreements --accept-source-agreements\")",
-      "Bash(powershell.exe -Command \"\n\\\\$paths = @\\(\n  'C:\\\\Program Files',\n  'C:\\\\Program Files \\(x86\\)',\n  \\\\\"\\\\$env:LOCALAPPDATA\\\\Microsoft\\\\WinGet\\\\Packages\\\\\",\n  \\\\\"\\\\$env:LOCALAPPDATA\\\\Programs\\\\\"\n\\)\nforeach \\(\\\\$p in \\\\$paths\\) {\n  if \\(Test-Path \\\\$p\\) {\n    Get-ChildItem \\\\$p -Recurse -Filter 'trivy.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n    Get-ChildItem \\\\$p -Recurse -Filter 'gitleaks.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n    Get-ChildItem \\\\$p -Recurse -Filter 'cloc.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n  }\n}\n\")"
+      "Bash(powershell.exe -Command \"\n\\\\$paths = @\\(\n  'C:\\\\Program Files',\n  'C:\\\\Program Files \\(x86\\)',\n  \\\\\"\\\\$env:LOCALAPPDATA\\\\Microsoft\\\\WinGet\\\\Packages\\\\\",\n  \\\\\"\\\\$env:LOCALAPPDATA\\\\Programs\\\\\"\n\\)\nforeach \\(\\\\$p in \\\\$paths\\) {\n  if \\(Test-Path \\\\$p\\) {\n    Get-ChildItem \\\\$p -Recurse -Filter 'trivy.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n    Get-ChildItem \\\\$p -Recurse -Filter 'gitleaks.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n    Get-ChildItem \\\\$p -Recurse -Filter 'cloc.exe' -ErrorAction SilentlyContinue | Select-Object FullName\n  }\n}\n\")",
+      "Bash(sudo apt-get:*)",
+      "Bash(mv /home/garygealy/src/code-arc/.claude/skills/start-review/skill.md /home/garygealy/src/code-arc/.claude/skills/start-review/SKILL.md)",
+      "Bash(mv /home/garygealy/src/code-arc/.claude/skills/scan/skill.md /home/garygealy/src/code-arc/.claude/skills/scan/SKILL.md)",
+      "Bash(wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key)",
+      "Bash(gpg --dearmor)",
+      "Bash(sudo tee:*)",
+      "Bash(ssh:*)",
+      "Bash(cloc:*)",
+      "Bash(gitleaks detect:*)",
+      "Bash(python3 -m json.tool)",
+      "Skill(update-config)"
     ]
   }
 }
