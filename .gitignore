@@ -1,0 +1,21 @@
+# Local review state — not committed
+CLAUDE.local.md
+
+# Cloned repos for review
+workspace/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+
+# SvelteKit
+.svelte-kit/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
