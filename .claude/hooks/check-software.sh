@@ -2,7 +2,7 @@
 
 missing=()
 
-for tool in trivy gitleaks cloc; do
+for tool in trivy gitleaks cloc gh; do
   if ! command -v "$tool" &> /dev/null; then
     missing+=("$tool")
   else
