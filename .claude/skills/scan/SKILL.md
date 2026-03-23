@@ -16,7 +16,7 @@ Work through the steps in order. Do not skip steps.
 
 ## Step 1 — Load Review State
 
-Read `CLAUDE.local.md` from the f-cat-new root directory.
+Read `CLAUDE.local.md` from the code-arc root directory.
 
 Extract:
 - **Repo path:** the value of `Local Path` (e.g. `workspace/signal-track/`)

@@ -32,7 +32,7 @@ Rules for working within Cloudflare Pages / Workers constraints. Apply whenever 
 
 ## Deployment
 
-- Never push directly to the `cloudflare` branch to trigger deploys — use the `/cut-a-release` skill instead
+- Never push directly to the `cloudflare` branch to trigger deploys
 - Do not connect the GitHub repo in the Cloudflare dashboard — this creates a duplicate build pipeline
 - D1 migrations must be applied separately: `wrangler d1 migrations apply <db-name> --remote`
 - `CLOUDFLARE_API_TOKEN` requires Pages **Edit** + D1 **Edit** permissions — read-only tokens will fail silently on migration apply
