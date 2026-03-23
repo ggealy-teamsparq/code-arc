@@ -143,7 +143,7 @@ If the clone fails, report the error and stop — do not proceed to Step 6.
 
 ## Step 6 — Write CLAUDE.local.md
 
-Write the following state file to `CLAUDE.local.md` in the f-cat-new root directory. Substitute all `<placeholders>` with real values collected in earlier steps. Use the current timestamp for `Started` and `Cloned At`.
+Write the following state file to `CLAUDE.local.md` in the code-arc root directory. Substitute all `<placeholders>` with real values collected in earlier steps. Use the current timestamp for `Started` and `Cloned At`.
 
 ```markdown
 # Active Review

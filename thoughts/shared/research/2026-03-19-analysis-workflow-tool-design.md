@@ -2,7 +2,7 @@
 date: 2026-03-19T00:00:00-05:00
 git_commit: (no commits yet)
 branch: main
-repository: ggealy-teamsparq/f-cat
+repository: ggealy-teamsparq/code-arc
 topic: "Analysis Workflow Tool Design — Modeling on cc-self-train"
 ---
 
@@ -14,13 +14,13 @@ topic: "Analysis Workflow Tool Design — Modeling on cc-self-train"
 
 ## Research Question
 
-How should f-cat-new be set up as an analysis workflow tool that a Dev Eng can use to review a repo, modeled on the patterns established in the cc-self-train training repo?
+How should code-arc be set up as an analysis workflow tool that a Dev Eng can use to review a repo, modeled on the patterns established in the cc-self-train training repo?
 
 ## Summary
 
-The cc-self-train repo is a "learn Claude Code by doing" environment with 4 projects, 10 progressive modules, reference docs, hooks, skills, and scripts — all orchestrated through Claude Code's features (skills, hooks, subagents, MCP, tasks). The **Sentinel** project within it is the closest analogue to what f-cat-new should become: a code analyzer & test generator that scans repos, applies rules, generates reports, tracks coverage, and automates quality checks.
+The cc-self-train repo is a "learn Claude Code by doing" environment with 4 projects, 10 progressive modules, reference docs, hooks, skills, and scripts — all orchestrated through Claude Code's features (skills, hooks, subagents, MCP, tasks). The **Sentinel** project within it is the closest analogue to what code-arc should become: a code analyzer & test generator that scans repos, applies rules, generates reports, tracks coverage, and automates quality checks.
 
-f-cat-new already has a strong foundation: 8 architecture rule files, 6 research agents, 8 CLI commands, 2 skills, a research-plan-implement plugin, and a SessionStart hook that checks for trivy/gitleaks/cloc. However, it has **zero application code** and a placeholder CLAUDE.md. The rules are currently SvelteKit/Cloudflare-specific, which would need to be generalized or supplemented for a multi-repo analysis tool.
+code-arc already has a strong foundation: 8 architecture rule files, 6 research agents, 8 CLI commands, 2 skills, a research-plan-implement plugin, and a SessionStart hook that checks for trivy/gitleaks/cloc. However, it has **zero application code** and a placeholder CLAUDE.md. The rules are currently SvelteKit/Cloudflare-specific, which would need to be generalized or supplemented for a multi-repo analysis tool.
 
 ## Detailed Findings
 
@@ -32,7 +32,7 @@ f-cat-new already has a strong foundation: 8 architecture rule files, 6 research
 - **`CLAUDE.local.md`**: Tracks per-user progress and preferences, survives context compaction
 - **`.claude/onboarding-state.json`**: Persists onboarding state across session restarts
 
-**Applicable to f-cat-new**: Replace the training-oriented `/start` with a `/start-review` skill that:
+**Applicable to code-arc**: Replace the training-oriented `/start` with a `/start-review` skill that:
   - Asks which repo to analyze (path or git URL)
   - Checks for required tools (trivy, gitleaks, cloc — already in `check-software.sh`)
   - Clones or validates the target repo
@@ -49,7 +49,7 @@ cc-self-train defines skills that build on each other:
 | `/recap` | Progress review |
 | `/release` | Full release automation |
 
-**Applicable to f-cat-new**: Define an analysis-focused skill set:
+**Applicable to code-arc**: Define an analysis-focused skill set:
 
 | Proposed Skill | Purpose | Modeled After |
 |----------------|---------|---------------|
@@ -105,7 +105,7 @@ The Sentinel project builds this pipeline across 10 modules:
 #### 4. Reference Docs Pattern (`context/` directory)
 cc-self-train stores 18 reference documents in `context/` covering every CC feature. These are read on-demand by Claude when explaining features.
 
-**Applicable to f-cat-new**: Create a `context/` directory with reference docs for:
+**Applicable to code-arc**: Create a `context/` directory with reference docs for:
 - Trivy usage and output formats
 - Gitleaks patterns and configuration
 - Cloc output parsing
@@ -115,9 +115,9 @@ cc-self-train stores 18 reference documents in `context/` covering every CC feat
 #### 5. StatusLine Configuration
 cc-self-train has a rich `statusLine` in settings.json that shows: user@host, MSYSTEM, working dir, git branch, model name, and context usage percentage. This uses `jq` to parse input JSON.
 
-**Already applicable**: f-cat-new has jq available (v1.8.1). This pattern can be adopted directly.
+**Already applicable**: code-arc has jq available (v1.8.1). This pattern can be adopted directly.
 
-### f-cat-new: Current State
+### code-arc: Current State
 
 #### What Exists
 - **8 architecture rule files**: auth, cloudflare, database, forms, styling, sveltekit, testing, typescript — all SvelteKit/Cloudflare specific
@@ -141,9 +141,9 @@ cc-self-train has a rich `statusLine` in settings.json that shows: user@host, MS
 9. **Rules are SvelteKit-specific** — need generalization or supplementation with language-agnostic analysis rules
 10. **No persistence** — no database for tracking findings across reviews
 
-### Mapping cc-self-train Patterns to f-cat-new
+### Mapping cc-self-train Patterns to code-arc
 
-| cc-self-train Pattern | f-cat-new Equivalent | Status |
+| cc-self-train Pattern | code-arc Equivalent | Status |
 |----------------------|---------------------|--------|
 | `/start` onboarding skill | `/start-review` | Not built |
 | `context/` reference docs | `context/` for trivy, gitleaks, cloc docs | Not built |
@@ -164,7 +164,7 @@ cc-self-train has a rich `statusLine` in settings.json that shows: user@host, MS
 ### Proposed Architecture (Derived from cc-self-train Sentinel)
 
 ```
-f-cat-new/
+code-arc/
 ├── CLAUDE.md                     # Project description, analysis workflow docs
 ├── CLAUDE.local.md               # Per-user review state (gitignored)
 ├── README.md                     # Setup guide for Dev Eng users
@@ -205,7 +205,7 @@ f-cat-new/
 
 ## Open Questions
 
-1. **Scope of analysis**: Should f-cat-new only orchestrate existing tools (trivy, gitleaks, cloc) or also include custom analysis rules like Sentinel's function-length/complexity checkers?
+1. **Scope of analysis**: Should code-arc only orchestrate existing tools (trivy, gitleaks, cloc) or also include custom analysis rules like Sentinel's function-length/complexity checkers?
 
 2. **Target repo handling**: Should the tool clone target repos into `workspace/`, analyze them in-place at their existing path, or support both?
 
@@ -219,4 +219,4 @@ f-cat-new/
 
 7. **Integration with existing research-plan-implement plugin**: Should the analysis workflow be a new plugin or extend the existing one?
 
-8. **CI/CD integration**: Should f-cat-new produce output consumable by CI systems (exit codes, SARIF format, etc.)?
+8. **CI/CD integration**: Should code-arc produce output consumable by CI systems (exit codes, SARIF format, etc.)?
