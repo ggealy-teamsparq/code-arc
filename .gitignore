@@ -1,5 +1,6 @@
 # Local review state — not committed
 CLAUDE.local.md
+.claude/settings.local.json
 
 # Cloned repos for review
 workspace/
